@@ -1,24 +1,19 @@
-// 
-
-
-
 import React, { useState, useEffect } from 'react';
-import eloquentJavaScriptText from "../components/eloquent_javascript.txt";
 
-export default function BookView() {
+export default function BookView({books}) {
   const [bookContent, setBookContent] = useState('');
   const [currentSection, setCurrentSection] = useState(0);
 
+  let bookss = books
   useEffect(() => {
-    // Load the book content from a text file (replace with your file path).
-    fetch(eloquentJavaScriptText)
+    fetch(bookss[books.length-1].content)
       .then(response => response.text())
       .then(text => setBookContent(text))
       .catch(error => console.error('Error loading book content:', error));
   }, []);
 
-  // Split the content into sections with a maximum of 2500 words per section
-  const wordsPerSection = 2500;
+  // Split the content into sections with a maximum of 500 words per section
+  const wordsPerSection = 3000;
   const contentSections = splitContentIntoSections(bookContent, wordsPerSection);
 
   const nextPage = () => {
