@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import BookView from './bookView';
 
 export default function BookUpload({books, setBooks}) {
      // State for multiple book objects
@@ -35,7 +36,7 @@ export default function BookUpload({books, setBooks}) {
         }
       };
 
-      console.log(books)
+      console.log()
   return (
     <div>
         <form>
@@ -52,6 +53,7 @@ export default function BookUpload({books, setBooks}) {
       />
       <button onClick={handleAddBook}>Upload Book</button>
         </form>
+      <BookView books={books}/> 
     </div>
   )
 }

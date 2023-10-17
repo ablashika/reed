@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { Box, Button, Text } from '@chakra-ui/react';
 
 export default function BookView({books}) {
   const [bookContent, setBookContent] = useState('');
   const [currentSection, setCurrentSection] = useState(0);
 
-  let bookss = books
-  useEffect(() => {
-    fetch(bookss[books.length-1].content)
-      .then(response => response.text())
-      .then(text => setBookContent(text))
-      .catch(error => console.error('Error loading book content:', error));
-  }, []);
-
+     let bookss = books
+     useEffect(() => {
+      if (books.length > 0) {
+        fetch(bookss[books.length - 1].content)
+          .then(response => response.text())
+          .then(text => setBookContent(text))
+          .catch(error => console.error('Error loading book content:', error));
+      }
+    }, [books.length, bookss]);
   // Split the content into sections with a maximum of 500 words per section
   const wordsPerSection = 3000;
   const contentSections = splitContentIntoSections(bookContent, wordsPerSection);
@@ -51,25 +53,43 @@ export default function BookView({books}) {
   }
 
   return (
-    <div>
-      <h1>hhhh</h1>
-      <div>
-        <button onClick={prevPage}>Previous Section</button>
-        <button onClick={nextPage}>Next Section</button>
-      </div>
-      <div
-        style={{
-          fontSize: '16px',
-          lineHeight: '1.5',
-          textAlign: 'justify',
-          backgroundColor: 'red',
-          width: '700px',
-          maxHeight: '800px', // Set a maximum height for the content container
-          overflow: 'hidden', // Hide overflow content
-        }}
-      >
-        {contentSections[currentSection]}
-      </div>
-    </div>
+    <Box>
+    <Text fontSize="2xl" fontWeight="bold" mb="4">
+      Book Title
+    </Text>
+    <Button colorScheme="teal" onClick={prevPage} disabled={currentSection === 0}>
+      Previous Section
+    </Button>
+    <Button
+      colorScheme="teal"
+      onClick={nextPage}
+      disabled={currentSection === contentSections.length - 1}
+      ml="2"
+    >
+      Next Section
+    </Button>
+    <Box
+      fontSize="lg"
+      lineHeight="1.5"
+      textAlign="justify"
+      backgroundColor="lightblue"
+      width="700px"
+      maxHeight="800px"
+      overflow="hidden"
+      mt="4"
+      p="4"
+      borderRadius="md"
+    >
+      {contentSections[currentSection]}
+    </Box>
+  </Box>
   );
 }
+
+
+
+
+
+
+
+
