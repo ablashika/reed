@@ -2,12 +2,14 @@
 import {
   Box,
   Center,
-  useColorModeValue,
   Heading,
   Text,
   Stack,
   Image,
 } from '@chakra-ui/react'
+import {
+  Link,
+} from 'react-router-dom';
 
 const IMAGE =
   'https://images.unsplash.com/photo-1528459061998-56fd57ad86e3?auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&w=2770'
@@ -16,7 +18,9 @@ export default function ProductSimple({books}) {
 
   console.log(books, "pro")
   return (<>
-    {books.map((book)=>(<>
+     
+    {books.map((book, index)=>(<>
+      <Link to={`/book/${index}`} key={index}>
     <Center py={12}>
    
       <Box
@@ -66,15 +70,13 @@ export default function ProductSimple({books}) {
            {book.title}
           </Text>
           <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-            Nice Chair, pink
+            Reed
           </Heading>
           <Stack direction={'row'} align={'center'}>
             <Text fontWeight={800} fontSize={'xl'}>
               $57
             </Text>
-            <Text textDecoration={'line-through'} color={'gray.600'}>
-              $199
-            </Text>
+           
           </Stack>
         </Stack>
        
@@ -82,7 +84,9 @@ export default function ProductSimple({books}) {
       </Box>
    
     </Center>
+    </Link>
        </>))}
+      
     </>
   )
 }

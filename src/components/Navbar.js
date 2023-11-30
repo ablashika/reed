@@ -8,7 +8,7 @@ export default function Navbar() {
      <div className='nav'>
       <h1> <Link to="/">Home</Link></h1>
       <h1> <Link to="/library">Library</Link></h1>
-      <h1> <Link to="/upload">Library</Link></h1>
+      <h1> <Link to="/upload">Upload</Link></h1>
      </div>
     </div>
   )
